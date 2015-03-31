@@ -18,7 +18,7 @@ module HTML
         super(doc, context, result)
 
         @base_url = '/'
-        @space_replacement = '_'
+        @space_replacement = '-'
 
         if context
           @base_url = context[:wiki_base_url] if context[:wiki_base_url]
@@ -57,7 +57,7 @@ module HTML
       # @param text Proposed link text.
       # @return Updated text to use as a link.
       def to_link(text)
-        URI::encode(@base_url + text.strip.gsub(/\s+/, @space_replacement))
+        URI::encode(@base_url + text.strip.parameterize(@space_replacement))
       end
     end
   end
