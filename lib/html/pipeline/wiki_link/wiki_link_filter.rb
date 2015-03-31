@@ -1,6 +1,6 @@
-# 
+#
 # Copyright (c) 2012-2013 by Lifted Studios.  All Rights Reserved.
-# 
+#
 
 require 'html/pipeline'
 require 'open-uri'
@@ -19,9 +19,9 @@ module HTML
 
         @base_url = '/'
         @space_replacement = '_'
-        
+
         if context
-          @base_url = context[:base_url] if context[:base_url]
+          @base_url = context[:wiki_base_url] if context[:wiki_base_url]
           @space_replacement = context[:space_replacement] if context[:space_replacement]
         end
 
@@ -31,7 +31,7 @@ module HTML
       end
 
       # Performs the translation and returns the updated text.
-      # 
+      #
       # @return [String] Updated text with translated wiki links.
       def call
         html.gsub(/\[\[([^\]|]*)(\|([^\]]*))?\]\]/) do
@@ -45,7 +45,7 @@ module HTML
       private
 
       # Converts the given text into an appropriate link description.
-      # 
+      #
       # @param text Proposed description text.
       # @return Updated text for use as a link description.
       def to_description(text)
@@ -53,7 +53,7 @@ module HTML
       end
 
       # Converts the given text into an appropriate link.
-      # 
+      #
       # @param text Proposed link text.
       # @return Updated text to use as a link.
       def to_link(text)
